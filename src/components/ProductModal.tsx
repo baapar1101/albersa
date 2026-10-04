@@ -48,7 +48,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     setTimeout(() => setAdded(false), 2000);
   };
 
-  const getVisualType = (id: string): 'coat' | 'trouser' | 'shirt' | 'jacket' | 'knit' | 'bag' => {
+  const getVisualType = (id: string): 'coat' | 'trouser' | 'shirt' | 'jacket' | 'knit' | 'bag' | 'boucle' | 'corset' => {
     switch (id) {
       case 'structural-coat':
         return 'coat';
@@ -62,6 +62,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
         return 'knit';
       case 'column-bag':
         return 'bag';
+      case 'boucle-jacket':
+        return 'boucle';
+      case 'kilim-corset':
+        return 'corset';
       default:
         return 'coat';
     }

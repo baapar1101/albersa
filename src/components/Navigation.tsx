@@ -37,6 +37,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   }, []);
 
   const navLinks = [
+    { label: lang === 'fa' ? 'آرشیو آتلیه' : 'ARCHIVE', href: '#atelier-showcase' },
     { label: t.nav.collection, href: '#collection' },
     { label: t.nav.interactive, href: '#interactive-view' },
     { label: t.nav.lookbook, href: '#lookbook' },

@@ -4,6 +4,7 @@ import { CustomCursor, CursorMode } from './components/CustomCursor';
 import { Navigation } from './components/Navigation';
 import { Hero3D } from './components/Hero3D';
 import { Manifesto } from './components/Manifesto';
+import { AtelierShowcase } from './components/AtelierShowcase';
 import { Collection } from './components/Collection';
 import { InteractiveProductViewer } from './components/InteractiveProductViewer';
 import { Lookbook } from './components/Lookbook';
@@ -162,6 +163,9 @@ export default function App() {
 
       {/* 2. Manifesto Section */}
       <Manifesto onSetCursorMode={setCursorMode} lang={lang} t={t} />
+
+      {/* 2.5 Creative Director & Atelier Haute Couture Archive */}
+      <AtelierShowcase onSetCursorMode={setCursorMode} lang={lang} t={t} />
 
       {/* 3. Featured Collection 026 */}
       <Collection

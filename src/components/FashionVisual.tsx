@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface FashionVisualProps {
-  type: 'coat' | 'trouser' | 'shirt' | 'jacket' | 'knit' | 'bag' | 'look1' | 'look2' | 'look3' | 'look4' | 'weave';
+  type: 'coat' | 'trouser' | 'shirt' | 'jacket' | 'knit' | 'bag' | 'look1' | 'look2' | 'look3' | 'look4' | 'weave' | 'boucle' | 'corset';
   className?: string;
   label?: string;
 }
@@ -193,6 +193,67 @@ export const FashionVisual: React.FC<FashionVisualProps> = ({ type, className = 
             ))}
             {/* Milled Anodized Base */}
             <rect x="140" y="405" width="120" height="12" rx="4" fill="url(#metalHandle)" />
+          </svg>
+        )}
+
+        {type === 'boucle' && (
+          <svg viewBox="0 0 400 520" className="w-full h-full max-h-[460px] drop-shadow-2xl">
+            <defs>
+              <pattern id="tweedTex" width="12" height="12" patternUnits="userSpaceOnUse">
+                <rect width="12" height="12" fill="#18181b" />
+                <path d="M0 0 L12 12 M12 0 L0 12" stroke="#ffffff" strokeWidth="1" opacity="0.4" />
+                <rect x="2" y="2" width="3" height="3" fill="#e4e4e7" opacity="0.6" />
+              </pattern>
+            </defs>
+            {/* Boxed Bouclé Jacket Silhouette */}
+            <path
+              d="M120 110 L280 110 L340 150 L320 320 L285 310 L280 440 L120 440 L115 310 L80 320 L60 150 Z"
+              fill="url(#tweedTex)"
+              stroke="#F1EFE9"
+              strokeWidth="0.8"
+              strokeOpacity="0.4"
+            />
+            {/* Scarf Cowl Neck */}
+            <path d="M150 90 Q200 130 250 90 L260 140 Q200 160 140 140 Z" fill="#09090b" stroke="#3f3f46" strokeWidth="1" />
+            {/* Double Breasted Pearl Enamel Buttons */}
+            {[180, 240, 300, 360, 410].map((y, i) => (
+              <g key={i}>
+                <circle cx="185" cy={y} r="8" fill="#f8fafc" stroke="#d4d4d8" strokeWidth="1.5" />
+                <circle cx="215" cy={y} r="8" fill="#f8fafc" stroke="#d4d4d8" strokeWidth="1.5" />
+              </g>
+            ))}
+            {/* Fringed Pockets */}
+            <rect x="130" y="320" width="55" height="45" fill="#141416" stroke="#71717a" strokeWidth="1" />
+            <rect x="215" y="320" width="55" height="45" fill="#141416" stroke="#71717a" strokeWidth="1" />
+          </svg>
+        )}
+
+        {type === 'corset' && (
+          <svg viewBox="0 0 400 520" className="w-full h-full max-h-[460px] drop-shadow-2xl">
+            <defs>
+              <pattern id="corsetPattern" width="24" height="24" patternUnits="userSpaceOnUse">
+                <rect width="24" height="24" fill="#991b1b" />
+                <polygon points="12,2 22,12 12,22 2,12" fill="#ef4444" stroke="#000000" strokeWidth="1" />
+                <rect x="10" y="10" width="4" height="4" fill="#f8fafc" />
+              </pattern>
+            </defs>
+            {/* Oversized Black Tailored Blazer Shoulders */}
+            <path d="M 60 120 L 150 100 L 160 480 L 40 480 Z" fill="#09090b" stroke="#27272a" strokeWidth="1" />
+            <path d="M 340 120 L 250 100 L 240 480 L 360 480 Z" fill="#09090b" stroke="#27272a" strokeWidth="1" />
+            {/* The Persian Kilim Corset */}
+            <path
+              d="M 140 180 Q 170 160 200 180 Q 230 160 260 180 L 250 380 Q 200 410 150 380 Z"
+              fill="url(#corsetPattern)"
+              stroke="#18181b"
+              strokeWidth="2"
+            />
+            {/* Boning Lines */}
+            <line x1="170" y1="170" x2="170" y2="390" stroke="#ffffff" strokeWidth="1" opacity="0.6" strokeDasharray="3 2" />
+            <line x1="200" y1="180" x2="200" y2="400" stroke="#ffffff" strokeWidth="1.2" opacity="0.9" />
+            <line x1="230" y1="170" x2="230" y2="390" stroke="#ffffff" strokeWidth="1" opacity="0.6" strokeDasharray="3 2" />
+            {/* Straps */}
+            <line x1="160" y1="110" x2="160" y2="170" stroke="#000000" strokeWidth="2" />
+            <line x1="240" y1="110" x2="240" y2="170" stroke="#000000" strokeWidth="2" />
           </svg>
         )}
 

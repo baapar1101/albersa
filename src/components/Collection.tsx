@@ -19,7 +19,7 @@ export const Collection: React.FC<CollectionProps> = ({
   lang,
   t,
 }) => {
-  const getVisualType = (id: string): 'coat' | 'trouser' | 'shirt' | 'jacket' | 'knit' | 'bag' => {
+  const getVisualType = (id: string): 'coat' | 'trouser' | 'shirt' | 'jacket' | 'knit' | 'bag' | 'boucle' | 'corset' => {
     switch (id) {
       case 'structural-coat':
         return 'coat';
@@ -33,6 +33,10 @@ export const Collection: React.FC<CollectionProps> = ({
         return 'knit';
       case 'column-bag':
         return 'bag';
+      case 'boucle-jacket':
+        return 'boucle';
+      case 'kilim-corset':
+        return 'corset';
       default:
         return 'coat';
     }
