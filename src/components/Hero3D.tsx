@@ -75,13 +75,42 @@ export const Hero3D: React.FC<Hero3DProps> = ({
       reflectivity: 0.45,
     });
 
-    // ALBERSA Coat: Heavy Textured Architectural Virgin Wool
+    // ALBERSA Coat: Heavy Textured Architectural Virgin Wool with Vertex Shader Cloth Simulation
+    const coatUniforms = {
+      uTime: { value: 0 },
+    };
+
     const woolCoatMat = new THREE.MeshStandardMaterial({
       color: 0x18181c,
       roughness: 0.84,
       metalness: 0.08,
       flatShading: false,
     });
+
+    woolCoatMat.onBeforeCompile = (shader) => {
+      shader.uniforms.uTime = coatUniforms.uTime;
+      shader.vertexShader = `
+        uniform float uTime;
+        ${shader.vertexShader}
+      `;
+      shader.vertexShader = shader.vertexShader.replace(
+        '#include <begin_vertex>',
+        `
+        #include <begin_vertex>
+        // Subtle cloth simulation: aerodynamic wave and drape sway
+        float clothFreq = 2.6;
+        float clothSpeed = 1.4;
+        // Shoulders remain stiffly structured; lower cascading hem moves fluidly
+        float hemWeight = smoothstep(0.85, -1.05, position.y);
+        float waveX = sin(position.y * clothFreq + uTime * clothSpeed + position.z * 1.8) * 0.025 * hemWeight;
+        float waveZ = cos(position.x * 2.8 + uTime * (clothSpeed * 1.15)) * 0.03 * hemWeight;
+        float breathingMotion = sin(uTime * 1.5 + position.y * 2.0) * 0.012 * (1.0 - hemWeight * 0.4);
+        
+        transformed.x += waveX;
+        transformed.z += waveZ + breathingMotion;
+        `
+      );
+    };
 
     // ALBERSA Lapel & Facings: Obsidian Satin Silk Contrast Trim
     const satinTrimMat = new THREE.MeshPhysicalMaterial({
@@ -211,8 +240,8 @@ export const Hero3D: React.FC<Hero3DProps> = ({
     outfitGroup.add(shoulderPads);
 
     // B. STRUCTURED COAT TORSO & ASYMMETRIC DRAPE MANTLE
-    // Custom parametric curved mantle representing heavy architectural wool folds
-    const coatBodyGeo = new THREE.CylinderGeometry(0.68, 0.98, 2.1, 32, 16, true);
+    // Custom parametric curved mantle representing heavy architectural wool folds with fine subdivision
+    const coatBodyGeo = new THREE.CylinderGeometry(0.68, 0.98, 2.1, 48, 32, true);
     const coatPos = coatBodyGeo.attributes.position;
     for (let i = 0; i < coatPos.count; i++) {
       const y = coatPos.getY(i);
@@ -422,6 +451,9 @@ export const Hero3D: React.FC<Hero3DProps> = ({
     const animate = () => {
       animId = requestAnimationFrame(animate);
       const elapsed = clock.getElapsedTime();
+
+      // Update GPU vertex shader cloth simulation time
+      coatUniforms.uTime.value = elapsed;
 
       // Inertia after release
       if (!isDragging) {
