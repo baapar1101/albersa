@@ -1,0 +1,6 @@
+{
+  "name": "ALBERSA — Avant-Garde Luxury Fashion House",
+  "description": "An immersive digital runway and architectural fashion experience exploring structure, movement, and material in high fashion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
